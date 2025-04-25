@@ -1,5 +1,0 @@
-# ninja log v6
-300	337	1745460099189679397	libmyselu_plugin.so	bf8b46d926a2b51
-1	297	1745460593540605910	CMakeFiles/myselu_plugin.dir/myselu_plugin.cpp.o	c55d5e27eb1da3a1
-1	332	1745460593540605910	CMakeFiles/myselu_plugin.dir/myselu_kernel.cu.o	8fbfb21df2a0f385
-332	372	1745460593871628763	libmyselu_plugin.so	d2d39edcd5ad4c31
