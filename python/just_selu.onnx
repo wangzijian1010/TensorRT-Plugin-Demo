@@ -1,0 +1,43 @@
+pytorch2.6.0:í
+›
+inputoutput
+/selu/Selu"Selu2÷/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/functional.py(1835): selu
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/activation.py(656): forward
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1729): _slow_forward
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1750): _call_impl
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1739): _wrapped_call_impl
+/home/TensorRT_Plugin_Demo/python/check_selu_onnx.py(11): forward
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1729): _slow_forward
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1750): _call_impl
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1739): _wrapped_call_impl
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/jit/_trace.py(129): wrapper
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/jit/_trace.py(138): forward
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1750): _call_impl
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/nn/modules/module.py(1739): _wrapped_call_impl
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/jit/_trace.py(1498): _get_trace_graph
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/onnx/utils.py(844): _trace_and_get_graph_from_model
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/onnx/utils.py(937): _create_jit_graph
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/onnx/utils.py(1053): _model_to_graph
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/onnx/utils.py(1428): _export
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/onnx/utils.py(495): export
+/root/miniconda3/envs/tensorrt/lib/python3.10/site-packages/torch/onnx/__init__.py(383): export
+/home/TensorRT_Plugin_Demo/python/check_selu_onnx.py(24): main
+/home/TensorRT_Plugin_Demo/python/check_selu_onnx.py(48): <module>
+
+main_graphZ
+input
+
+
+
+
+
+
+b 
+output
+
+
+
+
+
+
+B

@@ -1,0 +1,8 @@
+/home/TensorRT_Plugin_Demo/cmake-build-debug/CMakeFiles/myselu_plugin.dir
+/home/TensorRT_Plugin_Demo/cmake-build-debug/CMakeFiles/main.dir
+/home/TensorRT_Plugin_Demo/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/TensorRT_Plugin_Demo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/TensorRT_Plugin_Demo/cmake-build-debug/layernorm/CMakeFiles/layernormplugin.dir
+/home/TensorRT_Plugin_Demo/cmake-build-debug/layernorm/CMakeFiles/test_layernorm.dir
+/home/TensorRT_Plugin_Demo/cmake-build-debug/layernorm/CMakeFiles/edit_cache.dir
+/home/TensorRT_Plugin_Demo/cmake-build-debug/layernorm/CMakeFiles/rebuild_cache.dir
