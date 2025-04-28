@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 import onnxruntime as ort
+import os
 
 # 定义含有Conv和LayerNorm的模型
 class ConvLayerNormModel(nn.Module):
@@ -19,6 +20,28 @@ class ConvLayerNormModel(nn.Module):
         x = x.permute(0, 2, 1)   # 再转回来 (batch_size, seq_len, channels)
         x = self.layer_norm(x)
         return x
+
+# 定义比较函数
+def compare_func(model, dummy_input, output_file_prefix="model_input_output"):
+    # 使用PyTorch运行模型
+    torch_output = model(dummy_input).detach().numpy()
+
+    # 保存输入和输出为原始二进制 .bin 文件
+    input_file = f"{output_file_prefix}_input.bin"
+    output_file = f"{output_file_prefix}_output.bin"
+    
+    # 保存输入为原始二进制格式
+    dummy_input_numpy = dummy_input.numpy()
+    dummy_input_numpy.tofile(input_file)
+    
+    # 保存输出为原始二进制格式
+    torch_output.tofile(output_file)
+
+    print(f"输入已保存到 {input_file} (大小: {os.path.getsize(input_file)} 字节)")
+    print(f"输出已保存到 {output_file} (大小: {os.path.getsize(output_file)} 字节)")
+
+    return input_file, output_file, torch_output
+
 
 # 创建模型
 model = ConvLayerNormModel(normalized_shape=64)
@@ -45,8 +68,8 @@ torch.onnx.export(
 
 print("模型已成功导出为 conv_layernorm_model.onnx")
 
-# 使用PyTorch运行模型
-torch_output = model(dummy_input).detach().numpy()
+# 比较函数
+input_file, output_file, torch_output = compare_func(model, dummy_input)
 
 # 使用ONNX Runtime验证模型
 session = ort.InferenceSession("conv_layernorm_model.onnx")

@@ -98,5 +98,22 @@ def main():
     onnx.save(new_model, "custom_layernorm.onnx")
     print("替换完成，新模型已保存为 custom_layernorm.onnx")
 
+
+def add_attrs(model_path):
+    # 载入模型
+    graph = gs.import_onnx(onnx.load(model_path))
+
+    # 遍历节点，找到LayerNorm
+    for node in graph.nodes:
+        if node.op == "CustomLayerNorm":
+            print(f"找到 LayerNorm 节点: {node.name}")
+            # 给它加上属性
+            node.attrs["epsilon"] = 1e-5
+
+    # 保存新的ONNX
+    onnx.save(gs.export_onnx(graph), "layernorm_with_eps.onnx")
+
+
 if __name__ == "__main__":
-    main()
+    # main()
+    add_attrs("/home/TensorRT_Plugin_Demo/layernorm/python/custom_layernorm.onnx")
