@@ -1,0 +1,3 @@
+/home/TensorRT_Plugin_Demo/layernorm/build/CMakeFiles/layernormplugin.dir
+/home/TensorRT_Plugin_Demo/layernorm/build/CMakeFiles/edit_cache.dir
+/home/TensorRT_Plugin_Demo/layernorm/build/CMakeFiles/rebuild_cache.dir

@@ -1,38 +1,44 @@
-# 生成简单的CMAKE
-cmake_minimum_required(VERSION 3.25)
-project(TensorRTPluginDemo)
+cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+project(layernorm_plugin LANGUAGES CXX CUDA)
 
-include_directories(/usr/local/cuda/include)
-include_directories(/usr/local/tensorrt/include)
+# Require C++11 and CUDA (use newer standard as needed)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-link_directories(/usr/local/cuda/lib64)
-link_directories(/usr/local/tensorrt/lib)
+# (Optional) Specify CUDA architectures
+# set(CMAKE_CUDA_ARCHITECTURES 70 75 80 86) # adjust to your GPU
 
-include_directories(${CMAKE_SOURCE_DIR})
+# Find CUDA toolkit (CMake 3.18+ provides CUDA::cudart)
+find_package(CUDAToolkit REQUIRED)
 
-set(CMAKE_CXX_STANDARD 20)
-
-# 在 CMake 中定义插件库
-add_library(layernormplugin SHARED
-        src/layernormKernel.cu
-        src/layernormPlugin.cpp
+# List plugin source files (CUDA kernel and C++ plugin)
+set(SRC_FILES
+    layernorm_kernel.cu
+    layernorm_plugin.cpp
+    # (add other sources if needed)
 )
 
-# 指定需要链接的库
-target_link_libraries(layernormplugin
-        nvinfer
-        nvinfer_plugin
-        cudart
-)
+# Define shared library target
+add_library(layernormplugin SHARED ${SRC_FILES})
 
-# 指定插件库的位置，使用绝对路径
+# Enable separable compilation so that CUDA kernels are linked in
 set_target_properties(layernormplugin PROPERTIES
-        LIBRARY_OUTPUT_DIRECTORY "/home/TensorRT_Plugin_Demo/cmake-build-debug"
+    CUDA_SEPARABLE_COMPILATION ON
+    POSITION_INDEPENDENT_CODE ON
 )
 
+# Include TensorRT and CUDA include dirs (adjust TENSORRT_ROOT if needed)
+# e.g. target_include_directories(layernormplugin PRIVATE ${TENSORRT_ROOT}/include)
+# CUDA include is handled by find_package(CUDAToolkit)
 
+# Link against TensorRT and CUDA runtime libraries
+target_link_libraries(layernormplugin PRIVATE
+    nvinfer            # TensorRT core library
+    nvinfer_plugin     # TensorRT plugin registry
+    CUDA::cudart       # CUDA runtime
+)
 
-add_executable(test_layernorm test/testLayerNorm.cpp)
-target_link_libraries(test_layernorm layernorm_plugin)
-
-
+# Set output directory for the plugin library
+set_target_properties(layernormplugin PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "/home/TensorRT_Plugin_Demo/layernorm"
+)
