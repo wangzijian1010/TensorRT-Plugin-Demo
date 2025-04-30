@@ -17,6 +17,7 @@ class ConvLayerNormModel(nn.Module):
         # x: (batch_size, seq_len, channels)
         x = x.permute(0, 2, 1)   # 转成 (batch_size, channels, seq_len)
         x = self.conv(x)
+        # 输出x的shape
         x = x.permute(0, 2, 1)   # 再转回来 (batch_size, seq_len, channels)
         x = self.layer_norm(x)
         return x
@@ -47,8 +48,12 @@ def compare_func(model, dummy_input, output_file_prefix="model_input_output"):
 model = ConvLayerNormModel(normalized_shape=64)
 model.eval()
 
+
+
 # 创建示例输入
 dummy_input = torch.randn(1, 10, 64)
+test = model(dummy_input)
+print(f"输出形状: {test.shape}")
 
 # 导出ONNX
 torch.onnx.export(
